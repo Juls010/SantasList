@@ -124,6 +124,7 @@ body {
 
 .todo-header h2 {
     font-size: 1.5rem;
+    color: #05664a;
 }
 
 .countdown-container {
@@ -299,7 +300,8 @@ body {
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
-    display: block; 
+    display: block;
+    overflow: hidden; 
 }
 
 .select-options.view { 
@@ -559,6 +561,11 @@ body.santa-mode {
     background-color: var(--burgundy);
     background-image: linear-gradient(135deg, #800020, #2c000b);
     color: #0f0f0f;
+}
+
+body.santa-mode .custom-select,
+body.santa-mode #giftPriority {
+    display: none !important;
 }
 
 body.santa-mode .snow { 
