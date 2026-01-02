@@ -1,28 +1,32 @@
-function getGifts() {
-    return JSON.parse(localStorage.getItem("santasList")) || [];
-}
+const Storage = {
+    key: "santaList",
 
-function saveGifts(gifts) {
-    localStorage.setItem("santasList", JSON.stringify(gifts));
-}
+    get: function() {
+        return JSON.parse(localStorage.getItem(this.key)) || [];
+    },
 
-function addGift(gift) {
-    const gifts = getGifts();
-    gifts.push(gift);
-    saveGifts(gifts);
-}
+    save: function(gifts) {
+        localStorage.setItem(this.key, JSON.stringify(gifts));
+    },
 
-function removeGift(name) {
-    const gifts = getGifts().filter(g => g.name !== name);
-    saveGifts(gifts);
-}
+    add: function(gift) {
+        const gifts = this.get();
+        gifts.push(gift);
+        this.save(gifts);
+    },
 
-function toggleGiftBought(name) {
-    const gifts = getGifts(); 
-    const giftIndex = gifts.findIndex(g => g.name === name);
-    
-    if (giftIndex > -1) {
-        gifts[giftIndex].bought = !gifts[giftIndex].bought;
-        saveGifts(gifts);
+    remove: function(name) {
+        const gifts = this.get().filter(g => g.name !== name);
+        this.save(gifts);
+    },
+
+    toggle: function(name) {
+        const gifts = this.get();
+        const gift = gifts.find(g => g.name === name);
+        
+        if (gift) {
+            gift.bought = !gift.bought;
+            this.save(gifts);
+        }
     }
-}
+};
